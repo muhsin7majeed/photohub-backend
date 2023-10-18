@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 
-import connectDB from "./config/db.js";
+import connectDB from "./config/db";
+import rootRoutes from "./routes";
 
 dotenv.config();
 const app = express();
@@ -11,13 +12,7 @@ connectDB();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
-
-app.post("/signin", (req, res) => {
-  res.send(`welcome ${req.body.username}`);
-});
+app.use("/", rootRoutes);
 
 const PORT = 5000;
 
