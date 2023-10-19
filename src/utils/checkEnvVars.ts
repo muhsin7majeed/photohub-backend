@@ -1,5 +1,3 @@
-import { Request, Response, NextFunction } from "express";
-
 const requiredEnvVars = ["JWT_SECRET", "MONGODB_URL"];
 
 const checkEnvVars = () => {

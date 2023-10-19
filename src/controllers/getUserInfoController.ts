@@ -1,6 +1,4 @@
-import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { Response } from "express";
 
 import { CustomRequest } from "../types/types";
 
