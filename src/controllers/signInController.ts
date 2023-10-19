@@ -21,7 +21,15 @@ export const signInController = async (req: Request, res: Response) => {
     }
 
     const jwtSecret = process.env.JWT_SECRET || "";
-    const token = jwt.sign({ userId: userExists._id }, jwtSecret, { expiresIn: "24h" });
+    const token = jwt.sign(
+      {
+        userId: userExists._id,
+        username: userExists.username,
+        email: userExists.email,
+      },
+      jwtSecret,
+      { expiresIn: "24h" }
+    );
 
     res.status(200).json({ message: "Welcome back!", username: userExists.username, token });
   } catch (error: any) {
