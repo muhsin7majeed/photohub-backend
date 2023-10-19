@@ -8,6 +8,7 @@ const signInSchema = z.object({
 const signUpSchema = z.object({
   username: z.string().min(3),
   password: z.string().min(6),
+  email: z.string().email().optional(),
 });
 
 export { signInSchema, signUpSchema };

@@ -4,8 +4,12 @@ import bodyParser from "body-parser";
 
 import connectDB from "./config/db";
 import rootRoutes from "./routes";
+import checkEnvVars from "./utils/checkEnvVars";
 
 dotenv.config();
+
+checkEnvVars();
+
 const app = express();
 connectDB();
 
