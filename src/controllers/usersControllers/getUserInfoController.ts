@@ -1,6 +1,6 @@
 import { Response } from "express";
 
-import { CustomRequest } from "../types/types";
+import { CustomRequest } from "@_types/types";
 
 export const getUserInfoController = async (req: CustomRequest, res: Response) => {
   try {

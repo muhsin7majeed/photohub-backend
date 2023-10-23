@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { signInSchema } from "../schemas/zod/auth.zod";
-import { User } from "../models/usersModel";
+import { signInSchema } from "@schemas/zod/auth.zod";
+import { User } from "@models/usersModel";
 
 export const signInController = async (req: Request, res: Response) => {
   try {

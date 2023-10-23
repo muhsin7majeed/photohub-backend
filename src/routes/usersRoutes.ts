@@ -1,6 +1,7 @@
 import express from "express";
-import { getUserInfoController } from "../controllers/getUserInfoController";
-import { validateToken } from "../middlewares/validateToken";
+
+import { getUserInfoController } from "@controllers/usersControllers/getUserInfoController";
+import { validateToken } from "@middlewares/validateToken";
 
 const usersRoutes = express.Router();
 

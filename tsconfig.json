@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "target": "es5",
     "module": "commonjs",
     "lib": ["es6"],
@@ -10,6 +11,16 @@
     "noImplicitAny": false,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "paths": {
+      "@controllers/*": ["src/controllers/*"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@routes/*": ["src/routes/*"],
+      "@config/*": ["src/config/*"],
+      "@utils/*": ["src/utils/*"],
+      "@_types/*": ["src/types/*"],
+      "@models/*": ["src/models/*"],
+      "@schemas/*": ["src/schemas/*"],
+    }
   }
 }

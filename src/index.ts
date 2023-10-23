@@ -2,9 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 
-import connectDB from "./config/db";
-import rootRoutes from "./routes";
-import checkEnvVars from "./utils/checkEnvVars";
+import connectDB from "@config/db";
+import rootRoutes from "@routes/index";
+import checkEnvVars from "@utils/checkEnvVars";
 
 dotenv.config();
 

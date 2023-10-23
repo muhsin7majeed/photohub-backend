@@ -1,6 +1,6 @@
-import { Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { CustomRequest } from "../types/types";
+import { Response, NextFunction } from "express";
+import { CustomRequest } from "@_types/types";
 
 export const validateToken = (req: CustomRequest, res: Response, next: NextFunction) => {
   const token = req.header("Authorization");
