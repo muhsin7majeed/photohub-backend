@@ -1,7 +1,37 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 
-export const createPostController = async (req: Request, res: Response) => {
+import { CustomRequest } from "@_types/types";
+import { createPostSchema } from "@schemas/zod/post.zod";
+import { Post } from "@models/postsModel";
+
+export interface CreatePostCustomRequest extends CustomRequest {
+  body: {
+    tags?: string;
+    location?: string;
+    description?: string;
+  };
+}
+
+export const createPostController = async (req: CreatePostCustomRequest, res: Response) => {
   try {
+    console.log(req.body, req.files);
+
+    const validatedPost = createPostSchema.parse({ ...req.body, tags: JSON.parse(req.body.tags || "") });
+    console.log(validatedPost);
+
+    const medias = Array.isArray(req.files) ? req.files.map((file) => file.path) : [];
+
+    const newPost = new Post({
+      user: req.user?.userId,
+      medias: medias,
+      location: validatedPost.location,
+      description: validatedPost.description,
+      tags: validatedPost.tags,
+    });
+
+    newPost.save();
+
+    res.status(201).json({ message: "New post created", post: newPost });
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
