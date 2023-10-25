@@ -14,11 +14,12 @@ export interface CreatePostCustomRequest extends CustomRequest {
 
 export const createPostController = async (req: CreatePostCustomRequest, res: Response) => {
   try {
-    console.log(req.body, req.files);
+    console.log(req.files);
 
     const validatedPost = createPostSchema.parse({ ...req.body, tags: JSON.parse(req.body.tags || "") });
     console.log(validatedPost);
 
+    // TODO: Update path with base URL
     const medias = Array.isArray(req.files) ? req.files.map((file) => file.path) : [];
 
     const newPost = new Post({
