@@ -5,15 +5,18 @@ import jwt from "jsonwebtoken";
 import { signUpSchema } from "@schemas/zod/auth.zod";
 import { User } from "@models/usersModel";
 
-export const signUpController = async (req: Request, res: Response): Promise<void> => {
+export const signUpController = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const validatedUser = signUpSchema.parse(req.body);
-    const { username, password } = validatedUser;
+    const { username, password, email } = validatedUser;
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const jwtSecret = process.env.JWT_SECRET || "";
 
-    const newUser = new User({ username, password: hashedPassword });
+    const newUser = new User({ username, password: hashedPassword, email });
     const token = jwt.sign(
       {
         userId: newUser._id,
@@ -26,7 +29,13 @@ export const signUpController = async (req: Request, res: Response): Promise<voi
 
     await newUser.save();
 
-    res.status(201).json({ message: "User registered successfully", username: newUser.username, token });
+    res.status(201).json({
+      message: "User registered successfully",
+      username: newUser.username,
+      token,
+      email,
+      userId: newUser._id,
+    });
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }

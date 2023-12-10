@@ -14,7 +14,10 @@ export const signInController = async (req: Request, res: Response) => {
       return res.status(401).json({ error: "User not found" });
     }
 
-    const isValidPassword = await bcrypt.compare(validatedUser.password, userExists.password);
+    const isValidPassword = await bcrypt.compare(
+      validatedUser.password,
+      userExists.password
+    );
 
     if (!isValidPassword) {
       return res.status(401).json({ error: "Invalid password" });
@@ -31,7 +34,13 @@ export const signInController = async (req: Request, res: Response) => {
       { expiresIn: "24h" }
     );
 
-    res.status(200).json({ message: "Welcome back!", username: userExists.username, token });
+    res.status(200).json({
+      message: "Welcome back!",
+      username: userExists.username,
+      token,
+      userId: userExists._id,
+      email: userExists.email,
+    });
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
