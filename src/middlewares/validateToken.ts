@@ -21,6 +21,6 @@ export const validateToken = (req: CustomRequest, res: Response, next: NextFunct
 
     next();
   } catch (error) {
-    return res.status(401).json({ error: "Unauthorized - Invalid token" });
+    return res.status(403).json({ error: "Unauthorized - Invalid token" });
   }
 };
